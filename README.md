@@ -1,2 +1,2 @@
-# VIDS_Assignments
+# VID_Assignments
 Assignments repository for Visual Interfaces for Data Science
