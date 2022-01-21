@@ -1,0 +1,24 @@
+Type,Year,Day of year,Cost,Description
+tropical-cyclone,2017,239,125,Hurricane Harvey
+severe-storm,2017,160,2.5,Minnesota Hail Storm and Upper Midwest Severe Weather
+severe-storm,2017,128,2.2,Colorado Hail Storm and Central Severe Weather
+severe-storm,2017,85,2.1,South/Southeast Severe Weather
+severe-storm,2017,65,2.1,Midwest Tornado Outbreak
+severe-storm,2017,59,1.8,Central/Southeast Tornado Outbreak
+flooding,2017,115,1.7,Missouri and Arkansas Flooding and Central Severe Weather
+flooding,2017,39,1.5,California Flooding
+severe-storm,2017,20,1.1,Southern Tornado Outbreak and Western Storms
+flooding,2016,225,10.3,Louisiana Flooding
+tropical-cyclone,2016,282,10.3,Hurricane Matthew
+drought-wildfire,2016,1,3.6,West/Northeast/Southeast Drought
+severe-storm,2016,101,3.6,North/Central Texas Hail Storm
+flooding,2016,108,2.8,Houston Flooding
+drought-wildfire,2016,153,2.5,Western/Southeast Wildfires
+severe-storm,2016,117,2.5,South/Southeast Tornadoes
+flooding,2016,68,2.4,Texas and Louisiana Flooding
+severe-storm,2016,83,2.1,North Texas Hail Storm
+severe-storm,2016,129,1.8,Plains Tornadoes and Central Severe Weather
+severe-storm,2016,210,1.5,Rockies and Northeast Severe Weather
+severe-storm,2016,77,1.2,Southern Severe Weather
+severe-storm,2016,142,1.2,Rockies/Central Tornadoes and Severe Weather
+severe-storm,2016,53,1.1,Southeast and Eastern Tornadoes
