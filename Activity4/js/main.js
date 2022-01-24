@@ -11,6 +11,14 @@ const gapBetweenTimelines = 25; //how much space to put between lines
 let minYear = 99999; 
 let maxYear = 0; 
 let years = [];
+
+var categoriesToColor = {
+	"tropical-cyclone":"#081d58",
+	"drought-wildfire":"#ffffd9",
+	"severe-storm":"#c7e9b4",
+	"winter-storm-freeze":"#081d58",
+	"flooding":"#41b6c4",
+}
  
 
  d3.csv('data/disasters.csv') //ASYNCHRONOUS LOADING
@@ -62,32 +70,30 @@ let years = [];
 				.attr("stroke", "black")
 		
 		svg.selectAll("circle")
-			
-
-		// TO DO:  Add circles for each event in the data
-		// look at the syntax for adding a new element using d3
-		// attributes:  
-		//		opacity = .8
-		//		radius: d.cost)/165 * (100) + 5  //mapping from domain (cost) to range (pixels)
-		//		cx: d.daysFromYrStart/365 * (timelineX2-timelineX1) + timelineX1  //mapping from domain (days) to range (pixels 'x')
-		//		cy: (2017 - d.year) * gapBetweenTimelines + startOfTimelinesY ) //mapping from domain (year) to range (pixels 'y')
-		//		fill:  
-					// if (d.category == "tropical-cyclone") {
-					// 	return "#081d58";
-					// } else if (d.category == "drought-wildfire") {
-					// 	return "#ffffd9";
-					// } else if (d.category == "severe-storm") {
-					// 	return "#c7e9b4";
-					// } else if (d.category == "winter-storm-freeze") {
-					// 	return "#081d58";
-					// } else if (d.category == "flooding") {
-					// 	return "#41b6c4";
-					// } else {
-					// 	return "#000000";
-					// }
-			//	stroke: gray
-			//	stroke-width: 2
-
+				.data(data)
+				.enter()
+			.append("circle")
+				.attr("cx", (d) => d.daysFromYrStart/365 * 900 + 50)
+				.attr("cy", (d) => (2017 - d.year) * gapBetweenTimelines + startOfTimelinesY)
+				.attr("r", (d) => (d.cost)/165 * (100) + 5)
+				.attr("opacity", .8)
+				.attr("stroke","grey")
+				.attr("stroke-width",2)
+				.attr("fill", (d) => {
+					if (d.category == "tropical-cyclone") {
+						return "#081d58";
+					} else if (d.category == "drought-wildfire") {
+						return "#ffffd9";
+					} else if (d.category == "severe-storm") {
+						return "#c7e9b4";
+					} else if (d.category == "winter-storm-freeze") {
+						return "#081d58";
+					} else if (d.category == "flooding") {
+						return "#41b6c4";
+					} else {
+						return "#000000";
+					}
+				})
 
 	})
 	.catch(error => {
