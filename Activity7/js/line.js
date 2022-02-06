@@ -35,7 +35,7 @@ class Line {
         .range([0, vis.width]);
 
     vis.yScale = d3.scaleLinear()
-        .domain( d3.extent(vis.data, vis.yValue) )
+        .domain( d3.extent(vis.data, vis.yValue ))
         .range([vis.height, 0])
         .nice(); //this just makes the y axes behave nicely by rounding up
 
@@ -63,34 +63,25 @@ class Line {
     vis.yAxisG = vis.chart.append('g')
         .attr('class', 'axis y-axis')
         .call(vis.yAxis);
-
-    vis.area = d3.area()
-      .x(d => vis.xScale(vis.xValue(d)))
-      .y1(d => vis.yScale(vis.yValue(d)))
-
-    // Prepare a helper function
-    vis.line = d3.line()
-        .x(d => vis.xScale(d => d.year))
-        .y(d => vis.yScale(d => d.cost));
-
-    // Add the <path> to the <svg> container using the helper function
-    vis.chart.append('path')
-        .data([vis.data])
-        .attr('d', vis.line)
-        .attr('stroke', 'red')
-        .attr('fill', 'none');
     
     //first create a helper function : vis.area
     // x should use the x scale created above
     // y should use the y scale created above
     // y0 should use vis.height, since this is the bottom of the chart 
+    vis.area = d3.area()
+      .x(d => vis.xScale(d.year))
+      .y1(d => vis.yScale(d.cost))
+      .y0(vis.height)
+    
 
-
-    // Append an area path to your vis.chart.  
-    // NOTE:   .data([vis.data])  needs to be structured like this
-    //  Set the fill to  '#e9eff5'
-    // using the helper function: .attr('d', vis.area);
-
+    // // Append an area path to your vis.chart.  
+    // // NOTE:   .data([vis.data])  needs to be structured like this
+    // //  Set the fill to  '#e9eff5'
+    // // using the helper function: .attr('d', vis.area);
+    vis.chart.append('path')
+        .attr('d', vis.area(vis.data))
+        .attr('stroke', '#e9eff5')
+        .attr('fill', '#e9eff5');
 
 
     //TO DO- create a line path 
@@ -98,7 +89,9 @@ class Line {
     // first, initialize line generator helper function : vis.line
     // x should use xScale
     // y should use yScale
-
+   vis.line = d3.line()
+        .x(d => vis.xScale(d.year))
+        .y(d => vis.yScale(d.cost));
 
     // Append a path to your vis.chart
     // NOTE:   .data([vis.data])  needs to be structured like this
@@ -106,8 +99,12 @@ class Line {
     // fill should be 'none'
     // stroke width should be 2 
     // using the helper function: .attr('d', vis.line);
-
-
+        // Add the <path> to the <svg> container using the helper function
+    vis.chart.append('path')
+        .data([vis.data])
+        .attr('d', vis.line(vis.data))
+        .attr('stroke', '#8693a0')
+        .attr('fill', 'none');
 
   }
 

@@ -38,9 +38,12 @@ d3.csv('data/disasters.csv')
 			'containerWidth': 1000
 		}, data);
 
-		let line = new Line({
-			'parentElement': '#line'
-		},)
+		let lineChart = new Line({
+			'parentElement': '#line',
+			'containerHeight': 200,
+			'containerWidth': 1000
+		}, costsPerYear);
+		
 		//TO DO:  Make a line chart object.  Make it 200 pixels tall by 1000 pixels wide. 
 		//Be sure to send it the costsPerYear data 
 		// The svg for this element has already been created in index.html, above the timeline circles- check it out
