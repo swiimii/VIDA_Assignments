@@ -51,8 +51,8 @@ class ChoroplethMap {
 
 
     vis.projection = d3.geoAlbersUsa()
-            .translate([vis.width /2 , vis.height / 2])
-            .scale(vis.width);
+      .translate([vis.width /2 , vis.height / 2])
+      .scale(vis.width);
 
     vis.colorScale = d3.scaleLinear()
       .domain(d3.extent(vis.data.objects.counties.geometries, d => d.properties.pop))
