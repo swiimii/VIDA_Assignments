@@ -35,16 +35,6 @@ Promise.all([
   // const fipsData = data[1];
   const valueData = data[1]
 
-  // Add fips data to value data
-  // console.log(geoData);
-  // valueData.forEach(valueDataElement => {
-  //   for (let i = 0; i < fipsData.length; i++) {
-  //     if (fipsData[i].county === valueDataElement.County && fipsData[i].state === valueDataElement.State) {
-  //       valueDataElement.cnty_fips = fipsData[i].cnty_fips;
-  //     }
-  //   }
-  // });
-
   const valueDataByFips = d3.group(valueData, d=> d.cnty_fips);
 
   geoData.objects.counties.geometries.forEach(d => {
@@ -62,9 +52,10 @@ Promise.all([
   //   parentElement: '.graph1',
   // }, geoData);
 
-  // const myLine = new Line({
-  //   parentElement = 'graph2',
-  // }, geoData);
+  // Start with Hamilton
+  const myLine = new Line({
+    parentElement: 'graph1',
+  }, valueDataByFips, '39061');
 
 })
 .catch(error => console.error(error));

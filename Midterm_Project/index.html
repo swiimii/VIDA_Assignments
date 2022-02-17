@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>D3 Choropleth Map</title>
+    <title>Bad Air - Samuel Scherer</title>
     <link rel="icon" href="data:;base64,iVBORwOKGO=" />
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <h1>US Air Quality by County - Samuel Scherer</h1>
+    <h2 id="map-settings-display">2021 - Days with AQI</h2>
 
     <div class="section">
         <div class="viz"></div>
@@ -24,8 +25,8 @@
 
     <div id="tooltip"></div>
     <div class="section">
-        <div id="graph1" class="graph"></div>
-        <div id="graph2" class="graph"></div>
+        <svg id="graph1" class="graph"></svg>
+        <svg id="graph2" class="graph"></svg>
     </div>
 
     <div class="averageGraph"></div>

@@ -1,6 +1,6 @@
 class Line {
 
-  constructor(_config, _data) {
+  constructor(_config, _data, _selected_id) {
     this.config = {
       parentElement: _config.parentElement,
       containerWidth: _config.containerWidth || 500,
@@ -8,7 +8,9 @@ class Line {
       margin: { top: 10, bottom: 30, right: 50, left: 50 }
     }
 
-    this.data = _data;
+    this.myMap = ChoroplethMap.Singleton;
+    this.selected_id = _selected_id;
+    this.data = _data.get(this.selected_id);
 
     // Call a class function
     this.initVis();
@@ -26,8 +28,8 @@ class Line {
     //reusable functions for x and y
         //if you reuse a function frequetly, you can define it as a parameter
         //also, maybe someday you will want the user to be able to re-set it.
-    vis.xValue = d => d.year;
-    vis.yValue = d => d.value;
+    vis.xValue = d => d.Year;
+    vis.yValue = d => d['90th Percentile AQI'];
 
     //setup scales
     vis.xScale = d3.scaleLinear()
@@ -70,7 +72,6 @@ class Line {
   }
 
 
-  //leave this empty for now
  updateVis() {
     let vis = this;
 
