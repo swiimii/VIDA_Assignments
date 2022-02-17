@@ -61,19 +61,19 @@ class TimelineCircles {
       vis.colorPalette.domain( "tropical-cyclone", "drought-wildfire", "severe-storm", "flooding" );
 
 
-        // Initialize axes
-        vis.xAxis = d3.axisTop(vis.xScale);
-        vis.yAxis = d3.axisLeft(vis.yScale);
+      // Initialize axes
+      vis.xAxis = d3.axisTop(vis.xScale);
+      vis.yAxis = d3.axisLeft(vis.yScale);
 
 
-        // Draw the axis
-        vis.xAxisGroup = vis.chart.append('g')
-          .attr('class', 'axis x-axis') 
-          .call(vis.xAxis);
+      // Draw the axis
+      vis.xAxisGroup = vis.chart.append('g')
+        .attr('class', 'axis x-axis') 
+        .call(vis.xAxis);
 
-        vis.yAxisGroup = vis.chart.append('g')
-          .attr('class', 'axis y-axis')
-          .call(vis.yAxis);
+      vis.yAxisGroup = vis.chart.append('g')
+        .attr('class', 'axis y-axis')
+        .call(vis.yAxis);
 
       vis.updateVis(); //call updateVis() at the end - we aren't using this yet. 
   }

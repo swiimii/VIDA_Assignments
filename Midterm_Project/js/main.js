@@ -4,30 +4,42 @@
 
 Promise.all([
   d3.json('data/counties-10m.json'),
-  d3.csv('data/fips.csv')
+  d3.csv('data/fips.csv'),
+  d3.csv('data/annual_qui_by_county_all.csv')
 ]).then(data => {
   const geoData = data[0];
-  const valueData = data[1];
+  const fipsData = data[1];
+  const valueData = data[2]
 
-  // Combine both datasets by adding the population density to the TopoJSON file
+  // Add fips data to value data
   console.log(geoData);
-  geoData.objects.counties.geometries.forEach(d => {
-    console.log(d);
-    for (let i = 0; i < valueData.length; i++) {
-      if (d.id === valueData[i].cnty_fips) {
-        d.properties.pop = +valueData[i].Value;
+  valueData.forEach(valueDataElement => {
+    for (let i = 0; i < fipsData.length; i++) {
+      if (fipsData[i].county === valueDataElement.County && fipsData[i].state === valueDataElement.State) {
+        valueDataElement.cnty_fips = fipsData[i].cnty_fips;
       }
+    }
+  });
 
+  // const valueDataByYear = d3.group(valueData, d=> d.Year);
+  // const valueDataByFips = d3.group(valueDataByYear, d => d.entries().next().cnty_fips)
+
+  const valueDataByFips = d3.group(valueData, d=> d.cnty_fips);
+
+  geoData.objects.counties.geometries.forEach(d => {
+    if (valueDataByFips.has(d.id)) {
+      d.properties.air_data = valueDataByFips.get(d.id);
+      d.properties.air_data = d3.group(d.properties.air_data, d=>d.Year);
     }
   });
 
   const choroplethMap = new ChoroplethMap({
     parentElement: '.viz',
-  }, geoData);
+  }, geoData, valueDataByFips);
 
-  const myLine2 = new Line({
-    parentElement: '.graph1',
-  }, geoData);
+  // const myLine2 = new Line({
+  //   parentElement: '.graph1',
+  // }, geoData);
 
   // const myLine = new Line({
   //   parentElement = 'graph2',
