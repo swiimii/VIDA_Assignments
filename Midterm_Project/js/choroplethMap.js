@@ -40,8 +40,7 @@ class ChoroplethMap {
    */
   initVis() {
     let vis = this;
-
-    let year = "2021";
+    ChoroplethMap.Singleton = this;
 
     // Calculate inner chart size. Margin specifies the space around the actual chart.
     vis.width = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right;
@@ -80,35 +79,6 @@ class ChoroplethMap {
     
     vis.updateVis(this.year);
 
-    // MOUSE FUNCTIONALITY
-    vis.counties
-      .on('mousemove', (d,event) => {
-        // console.log(d);
-        // console.log(event);
-        const displayValue = vis.has_value(d) ? `<strong>${d.properties.air_data.get(year)[0]['Days with AQI']}</strong> ${'Days with AQI'}` : 'No fipsData available'; 
-        d3.select('#tooltip')
-          .style('display', 'block')
-          .style('left', (event.pageX + vis.config.tooltipPadding) + 'px')   
-          .style('top', (event.pageY + vis.config.tooltipPadding) + 'px')
-          .html(`
-            <div class="tooltip-title">${d.properties.name}</div>
-            <div>${displayValue}</div>
-          `);
-      })
-      .on('mouseleave', () => {
-        d3.select('#tooltip').style('display', 'none');
-      })
-      .on('click', (d) => {
-        const displayValue = vis.has_value(d) ? `<strong>${d.properties.air_data.get(year)[0]['Days with AQI']}</strong> ${'Days with AQI'}` : 'No fipsData available'; 
-        console.log(displayValue);
-      });
-
-
-
-    vis.g.append("path")
-      .datum(topojson.mesh(vis.us, vis.us.objects.states, function(a, b) { return a !== b; }))
-      .attr("id", "state-borders")
-      .attr("d", vis.path);
 
   }
 
@@ -125,11 +95,41 @@ class ChoroplethMap {
       // .attr("class", "county-boundary")
       .attr('fill', d => {
         if (vis.has_value(d)) {
-          return vis.colorScale(d.properties.air_data.get(year)[0]['Days with AQI']);
+          return vis.colorScale(d.properties.air_data.get(this.year)[0]['Days with AQI']);
         } else {
           return 'url(#lightstripe)';
         }
       });
+
+    // MOUSE FUNCTIONALITY
+    vis.counties
+      .on('mousemove', (d,event) => {
+        // console.log(d);
+        // console.log(event);
+        const displayValue = vis.has_value(d) ? `<strong>${d.properties.air_data.get(this.year)[0]['Days with AQI']}</strong> ${'Days with AQI'}` : 'No fipsData available'; 
+        d3.select('#tooltip')
+          .style('display', 'block')
+          .style('left', (event.pageX + vis.config.tooltipPadding) + 'px')   
+          .style('top', (event.pageY + vis.config.tooltipPadding) + 'px')
+          .html(`
+            <div class="tooltip-title">${d.properties.name}</div>
+            <div>${displayValue}</div>
+          `);
+      })
+      .on('mouseleave', () => {
+        d3.select('#tooltip').style('display', 'none');
+      })
+      .on('click', (d) => {
+        const displayValue = vis.has_value(d) ? `<strong>${d.properties.air_data.get(this.year)[0]['Days with AQI']}</strong> ${'Days with AQI'}` : 'No fipsData available'; 
+        console.log(displayValue);
+      });
+
+
+
+    vis.g.append("path")
+      .datum(topojson.mesh(vis.us, vis.us.objects.states, function(a, b) { return a !== b; }))
+      .attr("id", "state-borders")
+      .attr("d", vis.path);
   }
 
   

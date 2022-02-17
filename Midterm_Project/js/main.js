@@ -1,6 +1,15 @@
 /**
  * Load TopoJSON data of the world and the data of the world wonders
  */
+let dropDown = document.getElementById('myDropdown');
+for(let i = 1980; i <= 2021; i++) {
+  let item = document.createElement('a')
+  item.onclick = () => { 
+      ChoroplethMap.Singleton.updateVis(`${i}`)
+    };
+  item.text=`${i}`;
+  dropDown.appendChild(item)
+}
 
 Promise.all([
   d3.json('data/counties-10m.json'),

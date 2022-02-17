@@ -6,15 +6,25 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>US Counties</h1>
+    <h1>US Air Quality by County - Samuel Scherer</h1>
 
-    <div class="viz"></div>
+    <div class="section">
+        <div class="viz"></div>
+        <svg height="5" width="5" xmlns="http://www.w3.org/2000/svg" version="1.1"> <defs> <pattern id="lightstripe" patternUnits="userSpaceOnUse" width="5" height="5"> <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1JyBoZWlnaHQ9JzUnPgogIDxyZWN0IHdpZHRoPSc1JyBoZWlnaHQ9JzUnIGZpbGw9J3doaXRlJy8+CiAgPHBhdGggZD0nTTAgNUw1IDBaTTYgNEw0IDZaTS0xIDFMMSAtMVonIHN0cm9rZT0nIzg4OCcgc3Ryb2tlLXdpZHRoPScxJy8+Cjwvc3ZnPg==" x="0" y="0" width="5" height="5"> </image> </pattern> </defs></svg>
+        <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">Select Year</button>
+            <div id="myDropdown" class="dropdown-content"></div>
+        </div>
+    </div>
 
-    <svg height="5" width="5" xmlns="http://www.w3.org/2000/svg" version="1.1"> <defs> <pattern id="lightstripe" patternUnits="userSpaceOnUse" width="5" height="5"> <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1JyBoZWlnaHQ9JzUnPgogIDxyZWN0IHdpZHRoPSc1JyBoZWlnaHQ9JzUnIGZpbGw9J3doaXRlJy8+CiAgPHBhdGggZD0nTTAgNUw1IDBaTTYgNEw0IDZaTS0xIDFMMSAtMVonIHN0cm9rZT0nIzg4OCcgc3Ryb2tlLXdpZHRoPScxJy8+Cjwvc3ZnPg==" x="0" y="0" width="5" height="5"> </image> </pattern> </defs></svg>
 
     <div id="tooltip"></div>
-    <div class="graph1"></div>
-    <div class="graph2"></div>
+    <div class="section">
+        <div id="graph1" class="graph"></div>
+        <div id="graph2" class="graph"></div>
+    </div>
+
+    <div class="averageGraph"></div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
     <script type="text/javascript" src="https://d3js.org/d3-array.v2.min.js"></script>
 
@@ -25,5 +35,6 @@
     <script src="js/choroplethMap.js"></script>
     <script src="js/line.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/dropdown.js"></script>
 </body>
 </html>
