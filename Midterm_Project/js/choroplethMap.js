@@ -24,6 +24,7 @@ class ChoroplethMap {
     this.data = _geoData;
     this.us = _geoData;
     this.year = "2021";
+    this.displayData = 'Days with AQI';
 
     this.active = d3.select(null);
 
@@ -32,7 +33,7 @@ class ChoroplethMap {
 
   // Helper function for checking if a 
   has_value(d) { 
-    return d.properties.air_data != undefined && d.properties.air_data.has(this.year) && d.properties.air_data.get(this.year)[0]['Days with AQI'] < 366;
+    return d.properties.air_data != undefined && d.properties.air_data.has(this.year) && d.properties.air_data.get(this.year)[0][this.displayData] < 366;
   };
   
   /**
@@ -82,10 +83,11 @@ class ChoroplethMap {
 
   }
 
-  updateVis(year) {
+  updateVis(year, displayData) {
     // DRAW COUNTIES
     let vis = this;
-    vis.year = year;
+    vis.year = year ? year : vis.year;
+    vis.displayData = displayData ? displayData : vis.displayData;
     vis.counties = vis.g.append("g")
       .attr("id", "counties")
       .selectAll("path")
@@ -95,7 +97,7 @@ class ChoroplethMap {
       // .attr("class", "county-boundary")
       .attr('fill', d => {
         if (vis.has_value(d)) {
-          return vis.colorScale(d.properties.air_data.get(this.year)[0]['Days with AQI']);
+          return vis.colorScale(d.properties.air_data.get(this.year)[0][this.displayData]);
         } else {
           return 'url(#lightstripe)';
         }
@@ -106,7 +108,7 @@ class ChoroplethMap {
       .on('mousemove', (d,event) => {
         // console.log(d);
         // console.log(event);
-        const displayValue = vis.has_value(d) ? `<strong>${d.properties.air_data.get(this.year)[0]['Days with AQI']}</strong> ${'Days with AQI'}` : 'No fipsData available'; 
+        const displayValue = vis.has_value(d) ? `<strong>${d.properties.air_data.get(this.year)[0][this.displayData]}</strong> ${this.displayData}` : 'No fipsData available'; 
         d3.select('#tooltip')
           .style('display', 'block')
           .style('left', (event.pageX + vis.config.tooltipPadding) + 'px')   
@@ -120,7 +122,7 @@ class ChoroplethMap {
         d3.select('#tooltip').style('display', 'none');
       })
       .on('click', (d) => {
-        const displayValue = vis.has_value(d) ? `<strong>${d.properties.air_data.get(this.year)[0]['Days with AQI']}</strong> ${'Days with AQI'}` : 'No fipsData available'; 
+        const displayValue = vis.has_value(d) ? `<strong>${d.properties.air_data.get(this.year)[0][this.displayData]}</strong> ${this.displayData}` : 'No fipsData available'; 
         console.log(displayValue);
       });
 
