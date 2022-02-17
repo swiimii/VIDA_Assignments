@@ -1,7 +1,7 @@
 /**
  * Load TopoJSON data of the world and the data of the world wonders
  */
-let dropDown = document.getElementById('myDropdown');
+let dropDown = document.getElementById('yearDropdown');
 for(let i = 1980; i <= 2021; i++) {
   let item = document.createElement('a')
   item.onclick = () => { 
@@ -30,9 +30,6 @@ Promise.all([
     }
   });
 
-  // const valueDataByYear = d3.group(valueData, d=> d.Year);
-  // const valueDataByFips = d3.group(valueDataByYear, d => d.entries().next().cnty_fips)
-
   const valueDataByFips = d3.group(valueData, d=> d.cnty_fips);
 
   geoData.objects.counties.geometries.forEach(d => {
@@ -44,7 +41,7 @@ Promise.all([
 
   const choroplethMap = new ChoroplethMap({
     parentElement: '.viz',
-  }, geoData, valueDataByFips);
+  }, geoData);
 
   // const myLine2 = new Line({
   //   parentElement: '.graph1',
