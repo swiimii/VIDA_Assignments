@@ -27,7 +27,7 @@
     <div id="tooltip"></div>
 
     
-    <h2>Data for Hamilton County:</h2>
+    <h2>Data for Hamilton County, 1980-2021:</h2>
     <div class="aligned-section">
         <div id="legend1" class="centered"></div>
         <div>
@@ -38,10 +38,25 @@
     
         <div id="legend2" class="centered"></div>
         <div>
-            <p class="centered"># Of Days where <br> Pollutants were the Main Pollutant vs Time</p>
+            <p class="centered">Hamilton County - # Of Days where <br> Pollutants were the Main Pollutant vs Time</p>
             <svg id="graph2" class="graph"></svg>
             <p class="centered">Year</p>
         </div>
+    </div>
+    <div class="aligned-section">
+        <div id="legend3" class="centered"></div>
+        <div>
+            <p class="centered">Hamilton County - Days without Data</p>
+            <svg id="graph3" class="graph"></svg>
+            <p class="centered">Year</p>
+        </div>
+    
+        <!-- <div id="legend4" class="centered"></div>
+        <div>
+            <p class="centered"># Of Days where <br> Pollutants were the Main Pollutant vs Time</p>
+            <svg id="graph4" class="graph"></svg>
+            <p class="centered">Year</p>
+        </div> -->
     </div>
 
     <div class="averageGraph"></div>
@@ -57,6 +72,7 @@
     <script src="js/multiLinePollutants.js"></script>
     <script src="js/main.js"></script>
     <script src="js/dropdown.js"></script>
+    <script src="js/hamiltonDaysNoData.js"></script>
 
 
     <p>Data source: US Environmental Protection Agency. Air Quality System Data Mart [internet database] available via https://www.epa.gov/outdoor-air-quality-data. Accessed Feb. 15, 2022.</p>

@@ -55,5 +55,9 @@ Promise.all([
     parentElement: 'graph2',
   }, valueDataByFips, '39061', ['Days CO','Days NO2','Days Ozone','Days SO2','Days PM25','Days PM10'], 'legend2');
 
+  const myLine3 = new HamiltonDaysNoData({
+    parentElement: 'graph3',
+  }, valueDataByFips, '39061', ['Days with AQI'], 'legend3');
+
 })
 .catch(error => console.error(error));
