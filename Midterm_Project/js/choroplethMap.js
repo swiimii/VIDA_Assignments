@@ -107,10 +107,10 @@ class ChoroplethMap {
 
     // MOUSE FUNCTIONALITY
     vis.counties
-      .on('mousemove', (event, d) => {
+      .on('mouseover', (event, d) => {
         // console.log(d);
         // console.log(event);
-        const displayValue = vis.has_value(d) ? `<strong>${d.properties.air_data.get(this.year)[0][this.displayData]}</strong> ${this.displayData}` : 'No available'; 
+        const displayValue = vis.has_value(d) ? `<strong>${d.properties.air_data.get(this.year)[0][this.displayData]}</strong> ${this.displayData}` : 'No available';
         d3.select('#tooltip')
           .style('display', 'block')
           .style('left', (event.pageX + vis.config.tooltipPadding) + 'px')   
