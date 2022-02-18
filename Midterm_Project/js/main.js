@@ -59,5 +59,9 @@ Promise.all([
     parentElement: 'graph3',
   }, valueDataByFips, '39061', ['Days with AQI'], 'legend3');
 
+  const myBar1 = new BarChart({
+    parentElement: 'graph4',
+  }, valueDataByFips, '39061', ['Good Days', 'Moderate Days', 'Unhealthy for Sensitive Groups Days', 'Unhealthy Days', 'Very Unhealthy Days', 'Hazardous Days'], 'legend4');
+
 })
 .catch(error => console.error(error));
