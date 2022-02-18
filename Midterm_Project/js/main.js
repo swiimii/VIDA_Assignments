@@ -11,7 +11,7 @@ for(let i = 2021; i >= 1980; i--) {
   dropDown.appendChild(item)
 }
 
-const datas = ['Days with AQI', 'Good Days', 'Moderate Days', 'Unhealthy for Sensitive Groups Days',
+const datas = ['Good Days', 'Moderate Days', 'Unhealthy for Sensitive Groups Days',
                'Unhealthy Days', 'Very Unhealthy Days', 'Hazardous Days', 'Max AQI', '90th Percentile AQI',
                'Median AQI', 'Days CO', 'Days NO2', 'Days Ozone', 'Days SO2', 'Days PM25', 'Days PM10']
 
@@ -48,13 +48,13 @@ Promise.all([
     parentElement: '.viz',
   }, geoData);
 
-  // const myLine2 = new Line({
-  //   parentElement: '.graph1',
-  // }, geoData);
-
   // Start with Hamilton
   const myLine = new Line({
     parentElement: 'graph1',
+  }, valueDataByFips, '39061');
+
+  const myLine2 = new Line({
+    parentElement: 'graph2',
   }, valueDataByFips, '39061');
 
 })

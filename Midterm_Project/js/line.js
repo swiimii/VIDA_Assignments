@@ -38,7 +38,7 @@ class Line {
         .range([0, vis.width]);
 
     vis.yScale = d3.scaleLinear()
-        .domain( [0, d3.max(vis.data, vis.yValue)] )
+        .domain( [0, 365] )
         .range([vis.height, 0])
         .nice(); //this just makes the y axes behave nicely by rounding up
 

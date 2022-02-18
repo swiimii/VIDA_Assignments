@@ -24,7 +24,7 @@ class ChoroplethMap {
     this.data = _geoData;
     this.us = _geoData;
     this.year = "2021";
-    this.displayData = 'Days with AQI';
+    this.displayData = '90th Percentile AQI';
 
     this.active = d3.select(null);
 
@@ -90,6 +90,9 @@ class ChoroplethMap {
     vis.displayData = displayData ? displayData : vis.displayData;
     document.getElementById('map-settings-display').textContent = `${vis.year} - ${vis.displayData}`;
     // delete(vis.counties)
+    
+    document.getElementById('counties') ? document.getElementById('counties').remove() : true;
+    document.getElementById('state-borders') ? document.getElementById('state-borders').remove() : true;
     vis.counties = vis.g.append("g")
       .attr("id", "counties")
       .selectAll("path")
