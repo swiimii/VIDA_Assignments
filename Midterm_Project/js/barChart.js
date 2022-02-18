@@ -6,12 +6,12 @@ class BarChart {
       parentElement: _config.parentElement,
       containerWidth: _config.containerWidth || 800,
       containerHeight: _config.containerHeight || 300,
-      margin: { top: 10, bottom: 30, right: 50, left: 50 }
+      margin: { top: 10, bottom: 100, right: 50, left: 50 }
     }
 
     this.myMap = ChoroplethMap.Singleton;
     this.selected_id = _selected_id;
-    this.data = d3.group(_data.get(this.selected_id), d => d.Year).get('2021');
+    this.data = d3.group(_data.get(this.selected_id), d => d.Year).get('2021')[0];
     this.data_selections = _data_selection;
     this.legend = _legend;
 
@@ -20,6 +20,8 @@ class BarChart {
   }
     initVis() {
       let vis = this;
+
+      vis.colors = ["#8dd3c7","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"];
   
       vis.width = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right;
       vis.height = vis.config.containerHeight - vis.config.margin.top - vis.config.margin.bottom;
@@ -28,6 +30,10 @@ class BarChart {
           .range([0, vis.width])
           .paddingInner(0.2)
           .paddingOuter(0.2);
+      
+      vis.barColor = d3.scaleOrdinal()
+          .domain(vis.data_selections)
+          .range(vis.colors)
   
       vis.yScale = d3.scaleLinear()
           .range([vis.height, 0]);
@@ -63,8 +69,8 @@ class BarChart {
     updateVis() {
       let vis = this;
   
-      vis.xScale.domain(this.data_selections);
-      vis.yScale.domain([0, vis.data['Days with AQI']]);
+      vis.xScale.domain(vis.data_selections);
+      vis.yScale.domain([0, 100]);
   
       vis.renderVis();
     }
@@ -78,16 +84,21 @@ class BarChart {
       let vis = this;
       
       console.log(vis.data);
-      vis.chart.selectAll('category')
-          .data(vis.data_selections)
-        .join('rect')
+      vis.chart.selectAll('category').data(vis.data_selections).enter()
+        .append('rect')
           .attr('x', d => vis.xScale(d))
-          .attr('y', d => vis.yScale(vis.data[d]))
-          .attr('height', d => vis.yScale(vis.data[d]))
-          .attr('width', vis.xScale.bandwidth());
+          .attr('y', d => vis.yScale(vis.data[d]*100/vis.data['Days with AQI']))
+          .attr('height', d => vis.height - vis.yScale(vis.data[d]*100/vis.data['Days with AQI']))
+          .attr('width', vis.xScale.bandwidth())
+          .attr('fill', d => vis.barColor(d));
   
       // Update the axes
-      vis.xAxisG.call(vis.xAxis);
+      vis.xAxisG.call(vis.xAxis)
+        .selectAll('text')
+          .style('text-anchor','end')
+          .attr("dx", "-.8em")
+          .attr("dy", ".15em")
+          .attr("transform", "rotate(-15)");;
       vis.yAxisG.call(vis.yAxis);
     }
   
