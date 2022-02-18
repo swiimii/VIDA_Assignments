@@ -27,11 +27,19 @@
 
     
     <h1>Data for Hamilton County:</h1>
-    <div class="section">
-        
+    <div class="aligned-section">
+        <div id="legend1" class="centered"></div>
         <div>
-            <div id="legend1"></div>
+            <p class="centered">Hamilton County AQI vs Time</p>
             <svg id="graph1" class="graph"></svg>
+            <p class="centered">Year</p>
+        </div>
+    
+        <div id="legend2" class="centered"></div>
+        <div>
+            <p class="centered"># Of Days where <br> Pollutants were the Main Pollutant vs Time</p>
+            <svg id="graph2" class="graph"></svg>
+            <p class="centered">Year</p>
         </div>
     </div>
 
@@ -44,7 +52,8 @@
     <script src="js/d3.v6.min.js"></script>
     <script src="js/topojson.v3.js"></script>
     <script src="js/choroplethMap.js"></script>
-    <script src="js/line.js"></script>
+    <script src="js/multiLineHamilton.js"></script>
+    <script src="js/multiLinePollutants.js"></script>
     <script src="js/main.js"></script>
     <script src="js/dropdown.js"></script>
 

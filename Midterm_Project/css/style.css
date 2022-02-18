@@ -1,5 +1,6 @@
 .centered {
     text-align: center;
+
 }
 
 .background {
@@ -100,4 +101,8 @@
 
 .section {
     display: flex;
+}
+.aligned-section {
+    display: flex;
+    align-items: center;
 }

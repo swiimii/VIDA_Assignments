@@ -1,6 +1,6 @@
-class Line {
+class MultiLinePollutants {
 
-  constructor(_config, _data, _selected_id, _data_selection=['90th Percentile AQIs'], _legend) {
+  constructor(_config, _data, _selected_id, _data_selection, _legend) {
     this.config = {
       parentElement: _config.parentElement,
       containerWidth: _config.containerWidth || 500,
@@ -33,7 +33,7 @@ class Line {
         .attr('width', vis.config.containerWidth)
         .attr('height', vis.config.containerHeight);
 
-    vis.colors = ["#6e40aa","#bf3caf","#fe4b83","#ff7847","#e2b72f","#aff05b","#52f667","#1ddfa3","#23abd8","#4c6edb","#6e40aa"];
+    vis.colors = ["#8dd3c7","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"];
 
     for (let i = 0; i < vis.data_selections.length; i++) {
 
@@ -50,9 +50,9 @@ class Line {
             .range([0, vis.width]);
 
         vis.yScale = d3.scaleLinear()
-            .domain( [0, 500] )
-            .range([vis.height, 0])
-            .nice(); //this just makes the y axes behave nicely by rounding up
+            .domain( [0, 365] )
+            .range([vis.height, 0]);
+            // .nice(); //this just makes the y axes behave nicely by rounding up
 
         // Append group element that will contain our actual chart (see margin convention)
         vis.chart = vis.svg.append('g')
@@ -101,7 +101,7 @@ class Line {
             .attr('fill', 'none')
             .attr('d', vis.line);
         
-        var text = document.createTextNode(`${this.data_selection} vs Year`);
+        var text = document.createTextNode(`${this.data_selection}`);
         var container = document.createElement('p');
         container.appendChild(text);
         container.setAttribute('class', 'centered');

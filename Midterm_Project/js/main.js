@@ -47,17 +47,13 @@ Promise.all([
   }, geoData);
 
   // Start with Hamilton
-  const myLine = new Line({
+  const myLine = new MultiLineHamilton({
     parentElement: 'graph1',
-  }, valueDataByFips, '39061', ['Max AQI', 'Median AQI', '90th Percentile AQI' ], 'legend1');
+  }, valueDataByFips, '39061', ['Max AQI', '90th Percentile AQI', 'Median AQI'  ], 'legend1');
 
-  // const myLine2 = new Line({
-  //   parentElement: 'graph2',
-  // }, valueDataByFips, '39061', []);
-
-  // const myLine3 = new Line({
-  //   parentElement: 'graph3',
-  // }, valueDataByFips, '39061', []);
+  const myLine2 = new MultiLinePollutants({
+    parentElement: 'graph2',
+  }, valueDataByFips, '39061', ['Days CO','Days NO2','Days Ozone','Days SO2','Days PM25','Days PM10'], 'legend2');
 
 })
 .catch(error => console.error(error));
