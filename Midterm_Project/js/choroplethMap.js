@@ -33,7 +33,7 @@ class ChoroplethMap {
 
   // Helper function for checking if a 
   has_value(d) { 
-    return d.properties.air_data != undefined && d.properties.air_data.has(this.year);
+    return d.properties && d.properties.air_data && d.properties.air_data.has(this.year);
   };
   
   /**
@@ -89,6 +89,7 @@ class ChoroplethMap {
     vis.year = year ? year : vis.year;
     vis.displayData = displayData ? displayData : vis.displayData;
     document.getElementById('map-settings-display').textContent = `${vis.year} - ${vis.displayData}`;
+    // delete(vis.counties)
     vis.counties = vis.g.append("g")
       .attr("id", "counties")
       .selectAll("path")
@@ -106,7 +107,7 @@ class ChoroplethMap {
 
     // MOUSE FUNCTIONALITY
     vis.counties
-      .on('mousemove', (d,event) => {
+      .on('mousemove', (event, d) => {
         // console.log(d);
         // console.log(event);
         const displayValue = vis.has_value(d) ? `<strong>${d.properties.air_data.get(this.year)[0][this.displayData]}</strong> ${this.displayData}` : 'No available'; 
@@ -122,7 +123,7 @@ class ChoroplethMap {
       .on('mouseleave', () => {
         d3.select('#tooltip').style('display', 'none');
       })
-      .on('click', (d) => {
+      .on('click', (event, d) => {
         const displayValue = vis.has_value(d) ? `<strong>${d.properties.air_data.get(this.year)[0][this.displayData]}</strong> ${this.displayData}` : 'No available'; 
         console.log(displayValue);
       });
