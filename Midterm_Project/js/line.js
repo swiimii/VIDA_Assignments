@@ -1,16 +1,17 @@
 class Line {
 
-  constructor(_config, _data, _selected_id) {
+  constructor(_config, _data, _selected_id, _data_selection='90th Percentile AQIs') {
     this.config = {
       parentElement: _config.parentElement,
       containerWidth: _config.containerWidth || 500,
-      containerHeight: _config.containerHeight || 400,
+      containerHeight: _config.containerHeight || 300,
       margin: { top: 10, bottom: 30, right: 50, left: 50 }
     }
 
     this.myMap = ChoroplethMap.Singleton;
     this.selected_id = _selected_id;
     this.data = _data.get(this.selected_id);
+    this.data_selection = _data_selection;
 
     // Call a class function
     this.initVis();
@@ -30,7 +31,7 @@ class Line {
         //if you reuse a function frequetly, you can define it as a parameter
         //also, maybe someday you will want the user to be able to re-set it.
     vis.xValue = d => d.Year;
-    vis.yValue = d => d['90th Percentile AQI'];
+    vis.yValue = d => d[this.data_selection];
 
     //setup scales
     vis.xScale = d3.scaleLinear()
@@ -52,7 +53,7 @@ class Line {
         .attr('transform', `translate(${vis.config.margin.left},${vis.config.margin.top})`);
 
     // Initialize axes
-    vis.xAxis = d3.axisBottom(vis.xScale);
+    vis.xAxis = d3.axisBottom(vis.xScale).tickFormat(d3.format("d"));
     vis.yAxis = d3.axisLeft(vis.yScale);
 
     // Append x-axis group and move it to the bottom of the chart

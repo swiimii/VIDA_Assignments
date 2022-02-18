@@ -51,11 +51,11 @@ Promise.all([
   // Start with Hamilton
   const myLine = new Line({
     parentElement: 'graph1',
-  }, valueDataByFips, '39061');
+  }, valueDataByFips, '39061', '90th Percentile AQI');
 
   const myLine2 = new Line({
     parentElement: 'graph2',
-  }, valueDataByFips, '39061');
+  }, valueDataByFips, '39061', 'Median AQI');
 
 })
 .catch(error => console.error(error));
