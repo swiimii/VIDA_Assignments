@@ -33,7 +33,7 @@ class ChoroplethMap {
 
   // Helper function for checking if a 
   has_value(d) { 
-    return d.properties.air_data != undefined && d.properties.air_data.has(this.year) && d.properties.air_data.get(this.year)[0][this.displayData] < 366;
+    return d.properties.air_data != undefined && d.properties.air_data.has(this.year);
   };
   
   /**
