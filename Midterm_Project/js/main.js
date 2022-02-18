@@ -51,7 +51,7 @@ Promise.all([
   // Start with Hamilton
   const myLine = new Line({
     parentElement: 'graph1',
-  }, valueDataByFips, '39061', ['90th Percentile AQI', 'Median AQI', 'Max AQI'], 'legend1');
+  }, valueDataByFips, '39061', ['Max AQI', 'Median AQI', '90th Percentile AQI' ], 'legend1');
 
   // const myLine2 = new Line({
   //   parentElement: 'graph2',

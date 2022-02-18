@@ -13,6 +13,7 @@ class Line {
     this.data = _data.get(this.selected_id);
     this.data_selections = _data_selection;
     this.legend = _legend;
+
     // Call a class function
     this.initVis();
   }
@@ -49,7 +50,7 @@ class Line {
             .range([0, vis.width]);
 
         vis.yScale = d3.scaleLinear()
-            .domain( [0, 365] )
+            .domain( [0, 500] )
             .range([vis.height, 0])
             .nice(); //this just makes the y axes behave nicely by rounding up
 
@@ -99,6 +100,14 @@ class Line {
             .attr('stroke-width', 2)
             .attr('fill', 'none')
             .attr('d', vis.line);
+        
+        var text = document.createTextNode(`${this.data_selection} vs Year`);
+        var container = document.createElement('p');
+        container.appendChild(text);
+        container.setAttribute('class', 'centered');
+        container.style.color = vis.colors[i];
+        
+        document.getElementById(vis.legend).appendChild(container);
 
         vis.updateVis();
     }
