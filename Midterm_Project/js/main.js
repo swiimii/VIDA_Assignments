@@ -11,9 +11,7 @@ for(let i = 2021; i >= 1980; i--) {
   dropDown.appendChild(item)
 }
 
-const datas = ['Good Days', 'Moderate Days', 'Unhealthy for Sensitive Groups Days',
-               'Unhealthy Days', 'Very Unhealthy Days', 'Hazardous Days', 'Max AQI', '90th Percentile AQI',
-               'Median AQI', 'Days CO', 'Days NO2', 'Days Ozone', 'Days SO2', 'Days PM25', 'Days PM10']
+const datas = ['Max AQI', '90th Percentile AQI', 'Median AQI',]
 
 let dropDown2 = document.getElementById('dataDropdown');
 for(let i = 0; i < datas.length ; i++) {
